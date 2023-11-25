@@ -7,7 +7,7 @@ def imprime_mensagem_abertura():
     print("*********************************")
 
 def carrega_palavra_secreta():
-    arquivo = open('palavras.txt', "r")
+    arquivo = open('jogos/palavras.txt', "r")
     palavras = []
     for linha in arquivo:
         linha = linha.strip()
@@ -23,6 +23,11 @@ def carrega_palavra_secreta():
 
 def inicializa_letras_acertadas(palavra):
     return ["_" for letra in palavra]
+
+def mostrar_letras_acertadas(letras_acertadas):
+    for i in letras_acertadas:
+        print(i, end=' ')
+    print('\n')
 
 def remove_acentos(palavra):
   nova_palavra=''
@@ -48,7 +53,7 @@ def jogar():
     erros = 0
 
     while (not acertou and not enforcou):
-        print(letras_acertadas)
+        mostrar_letras_acertadas(letras_acertadas)
         chute = pede_chute()
         print(unidecode(palavra_secreta))
         if(chute in palavra_secreta):
