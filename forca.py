@@ -1,4 +1,5 @@
 import random
+from unidecode import unidecode
 
 def imprime_mensagem_abertura():
     print("*********************************")
@@ -18,10 +19,15 @@ def carrega_palavra_secreta():
 
     palavra_secreta = palavras[numero].upper()
 
-    return palavra_secreta
+    return palavra_secreta.upper()
 
 def inicializa_letras_acertadas(palavra):
     return ["_" for letra in palavra]
+
+def remove_acentos(letra):
+    if letra == 'Ç':
+        return letra
+    return unidecode(letra)
 
 def jogar():
     imprime_mensagem_abertura()
@@ -31,15 +37,15 @@ def jogar():
     enforcou = False
     acertou = False
     erros = 0
-    
+    print(palavra_secreta)
     while (not acertou and not enforcou):
         print(letras_acertadas)
         chute = input("Qual a letra? ")
-        chute = chute.strip().upper()
+        chute = remove_acentos(chute.strip().upper())
         if(chute in palavra_secreta):
             i = 0
             for letra in palavra_secreta:
-                if (chute==letra):
+                if (chute==remove_acentos(letra)):
                     letras_acertadas[i] = letra
                 i = i + 1
         else:
